@@ -1,0 +1,5 @@
+.next
+dist
+final
+node_modules
+package-loc.json
