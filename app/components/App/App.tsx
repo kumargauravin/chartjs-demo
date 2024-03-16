@@ -11,11 +11,15 @@ import {
   Title,
   Tooltip,
   Legend,
+  LineControllerChartOptions,
+  InteractionAxis,
+  InteractionMode,
 } from "chart.js";
 
 import { Line } from "react-chartjs-2";
 import faker from "faker";
 import zoomPlugin from "chartjs-plugin-zoom";
+import { ZoomOptions, ZoomPluginOptions } from "chartjs-plugin-zoom/types/options";
 
 ChartJS.register(
   CategoryScale,
@@ -28,7 +32,7 @@ ChartJS.register(
   zoomPlugin,
 );
 
-const zoomOptions = {
+const zoomOptions: ZoomPluginOptions = {
   limits: {
     y: { min: 0, max: 100, minRange: 10 },
   },
@@ -44,7 +48,8 @@ const zoomOptions = {
       enabled: true,
     },
     mode: "xy",
-    onZoomComplete({ chart }) {
+    onZoomComplete(props:any) {
+      const { chart } = props;
       // This update is needed to display up to date zoom level in the title.
       // Without this, previous zoom level is displayed.
       // The reason is: title uses the same beforeUpdate hook, and is evaluated before zoom.
@@ -57,7 +62,7 @@ export const options = {
   responsive: true,
   maintainAspectRatio: false,
   interaction: {
-    mode: "x",
+    mode: "x" as InteractionMode,
   },
   plugins: {
     legend: {
@@ -103,8 +108,8 @@ export const data = {
   ],
 };
 
-export function App() {
+export default function App() {
   return <>{
-    (typeof window !== 'undefined') && <Line height={300} options={options} data={data} />
+    (typeof window !== 'undefined') && <Line height={500} options={options} data={data} />
   }</>;
 }

@@ -1,6 +1,6 @@
-import Image from "next/image";
+import dynamic from "next/dynamic";
 import styles from "./page.module.css";
-import { App } from "@/app/components/App/App"
+const App = dynamic(() => import('./components/App/App'), { ssr: false });
 
 export default function Home() {
   return (
