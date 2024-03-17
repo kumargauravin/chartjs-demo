@@ -1,6 +1,7 @@
 'use client'
 import React from "react";
 import dynamic from 'next/dynamic';
+import Box from '@mui/material/Box';
 
 import {
   Chart as ChartJS,
@@ -59,7 +60,7 @@ const zoomOptions: ZoomPluginOptions = {
 };
 
 export const options = {
-  responsive: true,
+  // responsive: true,
   maintainAspectRatio: false,
   interaction: {
     mode: "x" as InteractionMode,
@@ -110,6 +111,7 @@ export const data = {
 
 export default function App() {
   return <>{
-    (typeof window !== 'undefined') && <Line height={500} options={options} data={data} />
+    (typeof window !== 'undefined') && <Box sx={{height:500, "& canvas":{height:"100% !important", width:"100% !important"}}}>
+    <Line options={options} data={data} /></Box>
   }</>;
 }
